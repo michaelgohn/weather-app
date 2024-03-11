@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
 
@@ -8,8 +9,17 @@ def index():
 
 @app.post('/weather-info')
 def weather_info():
-    city_name = request.form.get('city_name')
+    state_id = request.form.get('state_id')
 
-    url = 'https://api.weather.gov/alerts/active/zone/'
+    response = requests.get(f'https://api.weather.gov/alerts/active/area/{state_id}').json()
 
-    return render_template('weather-info.html', city_name=city_name)
+    features = response['features']
+
+    alerts = {}
+
+    for feature in features:
+        areaDesc = feature['properties']['areaDesc']
+        headline = feature['properties']['headline']
+        alerts[areaDesc] = headline
+
+    return render_template('weather-info.html', state_id=state_id, alerts=alerts)

@@ -1,9 +1,14 @@
 {% extends "_layout.html" %}
 
 {% block title %}
-    {{ city_name }} | Weather Info
+    {{ state_id }} | Weather Info
 {% endblock %}
 
 {% block body %}
-
+    <h3>{{ state_id }} | NWS Alerts</h3>
+        <ul>
+            {% for areaDesc, headline in alerts.items() %}
+            <li>{{ areaDesc }}: {{ headline }}</li>
+            {% endfor %}
+        </ul>
 {% endblock %}
