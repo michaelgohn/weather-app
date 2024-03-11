@@ -7,8 +7,8 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand ms-3" href="#">Mike's Weather App</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success-subtle">
+        <a class="navbar-brand ms-3" href="/">Mike's Weather App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,7 @@
             </li>
           </ul>
         </div>
-        <form class="d-flex me-3" method="GET" action="{{ url_for('weather_info', city_name='') }}">
+        <form class="d-flex me-3" method="POST" action="/weather-info">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="city_name">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>

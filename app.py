@@ -6,7 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.get('/weather-info/<city_name>')
-def weather_info(city_name):
+@app.post('/weather-info')
+def weather_info():
+    city_name = request.form.get('city_name')
+
+    url = 'https://api.weather.gov/alerts/active/zone/'
 
     return render_template('weather-info.html', city_name=city_name)
