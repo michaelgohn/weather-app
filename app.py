@@ -9,17 +9,13 @@ def index():
 
 @app.post('/weather-info')
 def weather_info():
-    state_id = request.form.get('state_id')
+    city_id = request.form.get('city_id')
+    country_id = request.form.get('country_id')
+    state_prov_id = request.form.get('state/prov_id')
 
-    response = requests.get(f'https://api.weather.gov/alerts/active/area/{state_id}').json()
+    # response = requests.get(f'https://api.weather.gov/alerts/active/area/{state_id}').json()
 
-    features = response['features']
-
-    alerts = {}
-
-    for feature in features:
-        areaDesc = feature['properties']['areaDesc']
-        headline = feature['properties']['headline']
-        alerts[areaDesc] = headline
-
-    return render_template('weather-info.html', state_id=state_id, alerts=alerts)
+    if state_prov_id != None:
+        return render_template('weather-info.html', city_id=city_id, country_id=country_id, state_prov_id=state_prov_id)
+    else:
+        return render_template('weather-info.html', city_id=city_id, country_id=country_id)
